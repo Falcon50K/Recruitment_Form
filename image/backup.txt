@@ -204,7 +204,6 @@
             }
         }
     </style>
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 <body>
     <header>
@@ -361,49 +360,13 @@
             const jsonData = {};
             formData.forEach((value, key) => { jsonData[key] = value });
 
-            // Store form data in localStorage
-            localStorage.setItem('registrationData', JSON.stringify(jsonData));
-
-            // Razorpay integration
-            var options = {
-                key: "rzp_test_4F74NNjof0nj65", // Replace with your Razorpay key
-                amount: 25000, // Amount in paise (250 INR)
-                currency: "INR",
-                name: "Career Counseling & Job Works",
-                description: "Registration Fee",
-                image: "image/iti logo.png",
-                
-
-                handler: function (response) {
-                    handleSuccessfulPayment(response.razorpay_payment_id);
-                },
-                prefill: {
-                    name: jsonData.candidateName,
-                    email: jsonData.email,
-                    contact: jsonData.contactNo
-                },
-                notes: {
-                    address: jsonData.address
-                },
-                theme: {
-                    color: "#0d47a1"
-                }
-            };
-            var rzp1 = new Razorpay(options);
-            rzp1.open();
-        });
-
-        function handleSuccessfulPayment(paymentId) {
-            const jsonData = JSON.parse(localStorage.getItem('registrationData'));
-            jsonData.paymentId = paymentId;
-            
             fetch('https://script.google.com/macros/s/AKfycbx8DPEmPq2QWRLwLJvYyLntF7ZnOmaO6r4Mj7S-bMboakn7HsF7oSewctbG3nM-pAnA/exec', {
                 method: 'POST',
                 body: JSON.stringify(jsonData),
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                mode: 'no-cors'
+                mode: 'no-cors' // Add this line
             })
             .then(response => {
                 if (!response.ok && response.type !== 'opaque') {
@@ -413,15 +376,14 @@
             })
             .then(data => {
                 console.log('Success:', data);
-                alert('Thank you for your registration. Your payment was successful and your data has been submitted!');
-                localStorage.removeItem('registrationData');
-                window.location.href = 'index.html';
+                alert('Thank you for your registration. Your data has been successfully submitted!');
+                this.reset();
             })
             .catch(error => {
                 console.error('Error:', error);
                 alert('There was an error submitting your data. Please try again.');
             });
-        }
+        });
     </script>
 </body>
 </html>
