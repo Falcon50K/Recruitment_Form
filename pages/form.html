@@ -231,14 +231,13 @@
         </div>
     </header>
     <main class="container">
-        <h1>Career Counseling & Job Works
-            - Prayagraj UP.</h1>
+        <h1>Career Counseling & Job Works - Prayagraj UP.</h1>
         <h2>Registration Form</h2>
         <p>Please fill out the form below to register for our career counseling and job placement services.</p>
         <form id="registrationForm">
             <div class="form-group">
                 <label for="candidateName">Candidate Name</label>
-                <input placeholder="Type your full name" type="text" id="candidateName" name="candidateName" required>
+                <input placeholder="Type your full name" type="text" id="candidateName" name="candidateName" required pattern="[A-Za-z\s]+" title="Only letters are allowed.">
             </div>
             <div class="form-group">
                 <label for="email">Email ID</label>
@@ -246,7 +245,7 @@
             </div>
             <div class="form-group">
                 <label for="fatherName">Father's Name</label>
-                <input placeholder="Father name" type="text" id="fatherName" name="fatherName" required>
+                <input placeholder="Father name" type="text" id="fatherName" name="fatherName" required pattern="[A-Za-z\s]+" title="Only letters are allowed.">
             </div>
             <div class="form-group">
                 <label for="dob">Date of Birth</label>
@@ -254,23 +253,23 @@
             </div>
             <div class="form-group">
                 <label for="contactNo">Contact No.</label>
-                <input placeholder="Enter your mobile no." type="tel" id="contactNo" name="contactNo" required>
+                <input placeholder="Enter your mobile no. (+91)" type="tel" id="contactNo" name="contactNo" required pattern="\+91\d{10}" maxlength="14" title="Phone number should be in the format +91xxxxxxxxxx (10 digits)">
             </div>
             <div class="form-group">
                 <label for="whatsappNo">WhatsApp No.</label>
-                <input placeholder="Enter your whatsapp no." type="tel" id="whatsappNo" name="whatsappNo">
+                <input placeholder="Enter your whatsapp no. (+91)" type="tel" id="whatsappNo" name="whatsappNo" pattern="\+91\d{10}" maxlength="14" title="Phone number should be in the format +91xxxxxxxxxx (10 digits)">
             </div>
             <div class="form-group">
                 <label for="parentNo">Parent's No.</label>
-                <input placeholder="Enter your father mobile no." type="tel" id="parentNo" name="parentNo">
+                <input placeholder="Enter your father's mobile no. (+91)" type="tel" id="parentNo" name="parentNo" pattern="\+91\d{10}" maxlength="14" title="Phone number should be in the format +91xxxxxxxxxx (10 digits)">
             </div>
             <div class="form-group">
                 <label for="highestEducation">Highest Education</label>
-                <input placeholder="Enter your highest qualifications" type="text" id="highestEducation" name="highestEducation" required>
+                <input placeholder="Enter your highest qualifications" type="text" id="highestEducation" name="highestEducation" required pattern="[A-Za-z\s]+" title="Only letters are allowed.">
             </div>
             <div class="form-group">
                 <label for="instituteName">Institute Name</label>
-                <input placeholder="Enter your College/Institute name" type="text" id="instituteName" name="instituteName" required>
+                <input placeholder="Enter your College/Institute name" type="text" id="instituteName" name="instituteName" required pattern="[A-Za-z0-9\s]+" title="Only letters and numbers are allowed.">
             </div>
             <div class="form-group">
                 <label for="nursingCourse">Nursing Course</label>
@@ -320,15 +319,15 @@
             </div>
             <div class="form-group">
                 <label for="address">Address</label>
-                <input placeholder="Enter your ful address" type="text" id="address" name="address" required>
+                <input placeholder="Enter your full address" type="text" id="address" name="address" required>
             </div>
             <div class="form-group">
                 <label for="pin">PIN Code</label>
-                <input placeholder="Enter Pin Code" type="text" id="pin" name="pin" required>
+                <input placeholder="Enter Pin Code" type="text" id="pin" name="pin" required pattern="\d{6}" title="Pin code must be 6 digits.">
             </div>
             <div class="form-group">
                 <label for="aadhar">Aadhar Number</label>
-                <input placeholder="Enter your 12 digit Aadhar No." type="text" id="aadhar" name="aadhar" required>
+                <input placeholder="Enter your 12 digit Aadhar No." type="text" id="aadhar" name="aadhar" required pattern="\d{12}" title="Aadhar number should be exactly 12 digits.">
             </div>
             <button type="submit">Pay Registration Fee</button>
             <p style="color: red; margin-bottom: 1rem;">Pay the registration fee of 250 ₹/-</p>
@@ -414,7 +413,7 @@
                 console.log('Success:', data);
                 alert('Thank you for your registration. Your payment was successful and your data has been submitted!');
                 localStorage.removeItem('registrationData');
-                window.location.href = 'index.html';
+                window.location.href = "../index.html"; // Redirect to home page after successful submission
             })
             .catch(error => {
                 console.error('Error:', error);
